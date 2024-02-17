@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
+<body>
+    <h1>Signup page</h1>
+    <hr>
+    <p> {{msg}} <p>
+    <form method="post" action="">
+        {% csrf_token %}
+        Username : <input type="text" name="username" value="{{username}}" required ><br><br>
+        Password : <input type="password" name="password" value="{{password}}" required ><br><br>
+        Enter your password again : <input type="password" name="cnfrmpassword" value="{{cnfrmpassword}}" required ><br><br>
+        Email-id : <input type="email" name="email" value="{{email}}" required ><br><br>
+        <input type="checkbox"> Remember me <br><br>
+        have an account <a href="/login">login</a><br><br>
+        <button type="submit">Signin</button>
+    </form>
+</body>
+</html>
