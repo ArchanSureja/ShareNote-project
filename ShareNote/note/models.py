@@ -8,8 +8,8 @@ class Media(models.Model):
 
 
 class Text(models.Model):
-    data = models.CharField()
-    style = models.CharField()
+    data = models.CharField(max_length=2048)
+    style = models.CharField(max_length=64)
     IsBold = models.BooleanField(default=False)
     IsItalic = models.BooleanField(default=False)
     IsUnderline = models.BooleanField(default=False)
@@ -25,3 +25,7 @@ class Note(models.Model):
     version = models.IntegerField()
     lastModified = models.DateTimeField()
 
+class Template(models.Model):
+    title = models.CharField(max_length=64)
+    content = models.ForeignKey(Text,on_delete=models.CASCADE,related_name="ContentOfTemp")
+    createdBy = models.ForeignKey(User,on_delete=models.CASCADE,related_name="CreatorOfTemplate")

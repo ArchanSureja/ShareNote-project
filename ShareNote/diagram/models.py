@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Shape(models.Model):
     ShapeType = models.CharField(max_length=64)
-    cord1 = models.DecimalField(max_digit=10, decimal_places=5)
-    cord2 = models.DecimalField(max_digit=10,decimal_places=5)
-    Text = models.CharField()
+    cord1 = models.FloatField()
+    cord2 = models.FloatField()
+    Text = models.CharField(max_length=64)
 
 class Diagram(models.Model):
     title = models.CharField(max_length=64)
     content = models.ForeignKey(Shape,on_delete=models.CASCADE,related_name="ShapesOfDiagram")
-    createdBy = models.ForeignKey(User,on_delete=models.CASCADE,related_name="creator")
-    collabs = models.ForeignKey(User,on_delete=models.CASCADE,related_name="collabs")
+    createdBy = models.ForeignKey(User,on_delete=models.CASCADE,related_name="CreatorOfDiagram")
+    collabs = models.ForeignKey(User,on_delete=models.CASCADE,related_name="collabsOfDiagram")
     label = models.CharField(max_length=64)
     version = models.IntegerField()
     lastModified = models.DateTimeField()
