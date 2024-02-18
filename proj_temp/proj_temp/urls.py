@@ -26,4 +26,6 @@ urlpatterns = [
     path('logout/', logout_user, name="logout"),
     path('resetPasswordPage/', resetPasswordPage, name="resetPasswordPage"),
     path('passReset/', PassReset, name="passReset"),
+    path('forgotPasswordPage/', forgotPasswordPage, name="forgotPasswordPage"),
+    path('passFortgot/', PassForgot, name="passForgot"),
 ]

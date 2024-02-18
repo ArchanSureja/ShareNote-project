@@ -50,7 +50,7 @@ def login_user(request):
                 login(request, user)
                 return redirect("/")
             else:
-                content = {'msg' : 'Enter valid credentials. User does not match.'}
+                content = {'msg' : 'Enter valid credentials.'}
                 return render(request, 'login.html', content) 
         else:
             return render(request, 'login.html')
@@ -86,5 +86,35 @@ def PassReset(request):
             return render(request, 'resetPassword.html', {'msg': msg})
         
     
+def forgotPasswordPage(request):
+    return render(request, 'forgotPassword.html')
     
+
+def PassForgot(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        passwordNew = request.POST['passwordNew']
+        cnfrmpasswordNew = request.POST['cnfrmpasswordNew']
+
+        if User.objects.filter(username=username).exists():
+            if passwordNew == cnfrmpasswordNew:
+                user = User.objects.get(username=username)
+                user.set_password(passwordNew)  
+                user.save()
+
+                logout(request)
+
+                msg = 'Password successfully updated.'
+                return render(request, 'forgotPassword.html', {'msg': msg})
+
+            else : 
+                msg = 'Passwords do not match.'
+                return render(request, 'forgotPassword.html', {'msg': msg})
+        
+        else:
+            msg = 'User does not match.'
+            return render(request, 'forgotPassword.html', {'msg': msg})
+
+
+
 
